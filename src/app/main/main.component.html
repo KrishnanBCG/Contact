@@ -1,0 +1,369 @@
+<div class="mainpage">
+
+  <!--------------------------------------------------search bar------------------------------------------------------------>
+  <!-- <div class="box" >
+        <input type="text" [(ngModel)]="searchQuery" (input)="onInputChange()" placeholder="Search...">
+        <a href="#">
+          <i class="fas fa-search"></i>
+        </a>
+      </div> -->
+  <!--------------------------------------------------Table creation bar------------------------------------------------------------>
+
+  <!-- <div class="table-container" *ngIf="table">
+      
+      <div>
+      
+        <section class="example-container mat-elevation-z8" tabindex="0">
+        <table mat-table [dataSource]="dataSource">
+  
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef > Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phonenumber">
+            <th mat-header-cell *matHeaderCellDef> phonenumber </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_phone}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_email}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="getdetails">
+            <th mat-header-cell *matHeaderCellDef> Get Details </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Update" (click)="getId(element.contact_id)" >Details</button> 
+            </td>
+            </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </section>
+      </div>
+  
+    </div>
+    </main>
+  </div> -->
+
+
+  <mat-toolbar style="height: 10%; background-color: #662d91;">
+    <button mat-icon-button (click)="toggle()">
+      <mat-icon style="color: white;">menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+
+
+  <mat-drawer-container class="example-container" autosize style="height: 87%;">
+
+    <mat-drawer class="example-sidenav" mode="side" [opened]="true" [style.width]="side1 ? '60px' : '160px'">
+
+      <!--------------------------------------------sidebar1------------------------------------------------->
+
+      <div *ngIf="side1">
+        <mat-nav-list (click)="toggle()">
+          <a mat-list-item data-toggle="tooltip" data-placement="top" title="Contact">
+            <mat-icon>account_box</mat-icon>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list style="font-size: 130%; margin-left: 10%;" (click)="toggle()">
+          <a mat-list-item data-toggle="tooltip" data-placement="top" title="Tags">
+            <i class="fa-solid fa-tag"></i>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list style="font-size: 130%; margin-left: 10%;" (click)="toggle()">
+          <a mat-list-item data-toggle="tooltip" data-placement="top" title="Folder">
+            <i class="fa-solid fa-folder"></i>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list style="font-size: 130%; margin-left: 10%;" (click)="toggle()">
+          <a mat-list-item data-toggle="tooltip" data-placement="top" title="Relation">
+            <i class="fa-solid fa-user-group"></i>
+          </a>
+        </mat-nav-list>
+      </div>
+      <!--------------------------------------------sidebar1 Ends------------------------------------------------->
+      <!--------------------------------------------sidebar2------------------------------------------------->
+
+      <div *ngIf="side2">
+
+        <mat-nav-list (click)="togglesidebarcontact()">
+          <a mat-list-item >
+            <span class="entry" style="display: flex; flex-wrap: wrap;">
+              <mat-icon>account_box</mat-icon>
+              <span style="margin-left: 15%;">Contact</span>
+            </span>
+          </a>
+          <div *ngIf="sidebarcontact">
+            <a mat-list-item data-toggle="modal" data-target="#contact">
+              <span class="entry">
+                <span style="margin-left: 0%;">Create Contact</span>
+              </span>
+            </a>
+            <a mat-list-item data-toggle="modal" data-target="#activecontact" (click)="ActiveCont()">
+              <span class="entry">
+                <span style="margin-left: 0%;">Active Contacts</span>
+              </span>
+            </a>
+            <a mat-list-item data-toggle="modal" data-target="#inactivecontact" (click)="Inactive()">
+              <span class="entry">
+                <span style="margin-left: 0%;">InActive Contacts</span>
+              </span>
+            </a>
+          </div>
+        </mat-nav-list>
+
+        <mat-nav-list (click)="togglesidebartags()">
+          <a mat-list-item>
+            <span class="entry">
+              <i class="fa-solid fa-tag" style="font-size: 120%; margin-left: 3%;"></i>
+              <span style="margin-left: 15%;">Tags</span>
+            </span>
+          </a>
+        </mat-nav-list>
+
+        <div *ngIf="sidebartags">
+
+          <mat-nav-list>
+            <a mat-list-item data-toggle="modal" data-target="#createtagspopup">
+              <span class="entry">
+                <span>Create Tags</span>
+              </span>
+            </a>
+          </mat-nav-list>
+
+          <mat-nav-list>
+            <a mat-list-item data-bs-toggle="modal" data-bs-target="#viewtagspopup">
+              <span class="entry">
+                <span>View Tags</span>
+              </span>
+            </a>
+          </mat-nav-list>
+        </div>
+
+        <mat-nav-list>
+          <a mat-list-item>
+            <span class="entry" data-toggle="modal" data-target="#folder" data-toggle="tooltip" data-placement="top"
+              title="Folder" data-toggle="modal" data-target="#folder">
+              <i class="fa-solid fa-folder" style="font-size: 120%; margin-left: 3%;"></i>
+              <span style="margin-left: 15%;">Folder</span>
+            </span>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+          <a mat-list-item>
+            <span class="entry" style="cursor: pointer;" data-toggle="modal" data-target="#Relation"
+              (click)="relationtagName()">
+              <i class="fa-solid fa-user-group" style="font-size: 120%; margin-left: 3%;"></i>
+              <span style="margin-left: 15%;">Relation</span>
+            </span>
+          </a>
+        </mat-nav-list>
+
+      </div>
+      <!--------------------------------------------sidebar2 Ends------------------------------------------------->
+    </mat-drawer>
+
+    <mat-toolbar style="height: 10%; background-color: revert-layer;">
+      <div style="display: flex; width: 100%; justify-content: center; height: 40px;">
+        <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" 
+        (input)="onInputChange()" placeholder="Search..." aria-label="Search" #input
+          style="width: 70%;">
+      </div>
+    </mat-toolbar>
+
+    <div *ngIf="display">
+        <section  tabindex="0">
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef > Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phonenumber">
+            <th mat-header-cell *matHeaderCellDef> phonenumber </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_phone}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.contact_email}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="getdetails">
+            <th mat-header-cell *matHeaderCellDef> Get Details </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Update" (click)="getId(element.contact_id)" >Details</button> 
+            </td>
+            </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </section>
+    </div>
+
+    <div *ngIf="!display">
+
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAABXFBMVEX/////pybu7u73mRwzMzNBQEIeiOX/nADv5tb97937qUf3lxH/oQD10Kjt8PP29vbvU1D7jAAAAAAoKCj3wZtoaGjm5ubt9Pv/9u78rEU7OjzvT0zzvYT/rSP2tX8Af+mw0fQbGxsAgeTJycmurq7T09Pd3d3vRUI4O0KTk5Pt+PicxvEAd+RaW12CgoJxcXFRUVGenp4jM0TzpSa7u7z0mZjuOzftMCzuh4buuLdtVj3M3eyacTbelytSSEAuN0IXISf97u7u1dT71dTvamj/58k5lu3A0+qHZjlCPDaneDUAI0bMjS++hzB6XjsJK0VgTz7YqYr2pqXsIh3ueXftEAD7trT7tl6GcV5sXE+dgWwAFR2xk3jyya3s08MAb+ZrqOz/0Z6KvPPNv6tPXW03W38vZ5sicrs5SFxDOCdFMQvjpliZr8aMpsiEjJYAQ33/zogAF0f/vVPCqZYzUIV7AAAQn0lEQVR4nO2di1vaWBbAYybBWitxiAQnDFVekWiBBND6AuqLqvVV69p5VFed7XS6M7s7s/v/f9/eJwmBJFwEgt/H+VqFcCXnxzn3nHNvLjccN5axjGUsYxnLWMYylrE8MeF5RVMURQpaj0eLks6YeqEIpKCbmbQStD69C1/Ri3lBFojIglHUK0/TQLxZNARBFW2iCoIR1fmgNWMWyTRUVSUIMhCKJaiGGbRyjKKImERNRuR8wQRSyMuRJD4m5LNB68ciegSpLcj5DOzzEhDwi8/ksYFU+ekYR4omocaqoWucxNtE4hTdQCZLFp5IYFPyAmQxTIXj24TjdQO+nCxqQevZjSAWVS1kW62CLAOPcOkiNI4cfQI0ShGxmEobCvAyDuJIvC4impGP0XxBhSwVqZ0F0WBzZaCryYXg1Ny7XF29vN7xbiRlUPdOd0JBfkZpkG0yw9G8TXZXNzau4vHZ/UtPnCxUMuLGQowDf5uwoRhMvtlbv96fBRKPL6170PAF4D5J050FBgBEIyF3jA4NwCY7+9dr8bW1tddLs7Nrq+7t0iDBCEWq9nK4HWVZojR5aJogHG19aSkevwYPVteAeTbcmvEGUFDQsGHCu6vX7TAbqwqP+o2Uhm0DiGg7H2bjs3vo4erS7NqlWztoGDlDTLA7u/b6incY5+r12gce03CFYEyz92GJOtfO61n3XgM8R80TwyxfQ5e8Uuw0yjo49nqPJzFNBqYp8BKrPBJmZ/3qivjWzpo7jBIBhjFp59gA1pxdW1eWW1niawqKadA0Aih6PCKfizx6eLdD9d8AMJcub2fKLcpdQ5oliwazLF3D58g0mh1+iDBU9oCCS24BAKQOoaBYZ90AeWk2vr5LaDDLxjJWCPYa5x8MFwaxuHYZ8EELLTkGmBFkJmyb8BVmCVOFwA8dmDKfZfWzPsEglv09l1c1EMuMil215Y0PmCbML+9jFksj0BBGP5W50/QHZgew0BDdQTLgc462fs6IBvWb/bjNLhSGh6G8EgwMcBQPFhichKLWeuLljdezMKbBWBCPbyzbNIIMIMmyR4C+wMBYG3dn4YqqrZSxaJZgTEMs18stGoEf4E9knTUC9AXmEnQYj7oMpkyh0OYzYRTTAMusnQXDwLqUPZz1BWY1Pvvaq/43xE4wfPhyCcIsXS47NAoWZqknGGUdW2ZVGSnLrC39zQsGuVkHFmQYGNN2W/oMrJyLQlB9Boybr71eRwGgTTOUK2eXUL7ZdUazfGDRjPMpWPVOoZnkfVoLOPKM2ktx1h+YvUuPwMxxFVictOZzmvfDuBZYatLgQQAqszOBJM3dVTAW8XgdljNqi2o07y9btQAdrSHDBFjOgKQZv/JqAD9n3aZaeN+W90EtAMc3Vzat4FhTiGqBwOzBD9mrAYhNgr04w32f5kpcCxAa1EiCpRlzMOPnXYWFZmPdM5qhKQC1WTfisZithllGtcDa1TL8cCFLpc0vu5HY/Xcu8vEZC42PSGhQr9gM0VJbgvENrDc/7NEZdFBmOsvsbmC+n3aR51N9hOHAYAt0aAuGjitbaCAMFCkL2XVGFATzTUfpAUaqmK6XjDXZNge4szq772ABNPvxdWIKKQoMYzCPZvoFI2UqWqUoykkh7dKgIMPRFj5peGd3t31Kc3eXpBrOhPOzbUOGocGAstAQ4WX9ZNHFNFl0bYbGp3CH6Vl6TErDHiOyTzT1CSZryGSFgix2hpEkE042Gx0u/zlE0qLQMB2K7CHB6M21FhHdBYbTosA2Qt6fBjqkqvbA0h+YtEhh5IKLl0mSlEZXkYo+WiqQRZSZk3/fYPQkJnnzw9yMS64F6QNfOpOLvIeekoZZMv4GHBAMcAxBeCPXfvzx/dycOwzP6/DKOChr3HAkKRuFPiboPbH0CSYpyD8IP81BcfkrfFUW04iZzk4kaRlRQCy9+FifYICbybW5T7UZPxiJN9GiBqEIcBwKSwClmESs7BPm/YSpqD8Ds3RhGS4j4PVLYlFP8xwFAtGBT5tFFdnNyPTK0h8YqRj5NEfE0zJZgy4yE1QjqleymiJJipbO6FEDoYD4kO2ZpU95RhOaMF4BgI9iL5PRcixVFQ3DyOfBD5Es25Ll3s3SNxguS2FuPGAkHS3C0nnQx8j6PyL4mRxhL5QHAcMdeBsG5xmkvwHXL5mq3GTAVIKsmlJvEbnvMCiS3biP50Afz6L1WQLKh8CWBQNRoH+imNezHdfUBAATe3vr5WMIBtcpKi3OQNmjocXAdCHwo1H6A7O10vj7yg2AuX275Q5jon7SUnTRqcPH26RfMLGVxkJo4UG6vZ0K3zVW3ro0Q2UmXHvVH70HAxO7S6VCodTdfBgMrlYWUo2HWHujqZkZFJVFgXn2aJgw4TuAAqQxD95sfiUVSqUabca5f/7isA5ZSp/65FAuMC+/ne6I0yVMA7OEUgjmbQM+bKy0tvl+evK4BFlyP77cGTAMkA443cFQltAr9G5bxE4PLXaZni4jFrH0/maQLATm2297g7mjLKFXMfhuCj1gs838x8lJnBnrP910mMcYAEybbbqBeQg15dUWfDfag0Ipi2bq+eRZDuXHo18G2mMsmDbTdAGDegiRhUVUFj9QmNAibXXw/BQb5o05WLs8CiZmORmKzXaYkBXTnn3KYcP8Y2toME4/84dZCdnFAQNosG1iK58xi8g8qT9EmK1Gyg6DEk3YggGetgKqldjDr+SrMuwLroYHYzOClWgUu+cB11vcuvuSO8KVfw/TrUOD2Qq1ygKEIXmmmUkbjdBvR8Qwg2fpGSb2sNAK8wrASMT1Ynf0xdRnwiIO3skeAeNgQTDzJFhz0mIIG+fXryRffoqNMAwxzMJdE0aywTTj9j/JsPjo4wjDxF5hL3pYXGixDH6MBgHQOHSIf179fXRhYg2CwK20wuDjeLwZuyMdRiydvRhdGJr7FxY7w5DknyYTSmJ9evr3WHjw0gvMW8KSuotZMAs4mqHHi6iZRp2sdDr9zfOZYchHcqX8m25hwJifsDSAOzVhUrY8g0pmvkjmxXKb5YmJiRfDkImmdAUjLVpJHhqgCYPLGfziHWxp0jm++slEANIFTOwu1KyL0XCyCWMvNCFMRSQwpcNyEDATvjArNIpRFgvmAc9oYCuBDhOlhqmdJAKBmfCGWbbq5BQdSlKYhRXJDgPX8hPDHAeD0kLTCgPnHh9eWWZp0KlLCvMKjTTnF5HpGluZpEh7f3XkYG5nplaanSVExl0tMG9h1iKJpvHHUXOG/zggJ/OAmb+Zm2tQFPu0GC1n8IQGzZqk7geGOQum9ztoWmDmb2/mXv6RQg7WOv3aEYbWymJODKr3u8Pc3qALSWiy0jHP3wEm1WQRc4dBsnSEmX+JWO7/SD20XbLoAPOlySKK1ZGDwdf4Dualt+0T/A4YGM2aHUasB9j7XWG4qZsDl4tii63RDMB8PrIMEyyLC4y7LDryTOiLhfIuuBTjoGGEWSDlDJlZQk62GbBheoYhV5v+ZXUYsRQ0Su8wqWeali3IlpMFWJQ9GuZzRJYjNpbcRZC5/1EwXz5/hWsBbWsu6qdBk0z0BPPly6+/OVnkf38MmmSCGWbrP58//1b/ipebWiyqkf0zaBIobDDZyNevdBmwDUY2ufugQaCwwaQjgtAOo+Y17mAEAkB/YExQAn0XNMkEK0zFDkMDgFrkQa39xGGoafA2K6MQziaYYDItMMQ28kBhmPriY2AADlyhiGDufbU6Pm0qVj499lCyut0cfieqxyzp+HEw6EsBCObghc+Jqn/ltsuUK/eXxyzu4TvxNEFYzkp/MVTjbDBJdxi/E5U3S4SmvC2WNj0sc1orYRrAkjtnmVhggjEtGENthZn3PVMV0gDNEtu5kvdk4alYhzSIZZul0zDB6BZMQWyF4fxPCmkOE/4sExMn9RygqW4ysvQMkzEcMP/1P1f1ol7f3q7XL/xG2ImT81zt+KzOyEJouoQpWDDpvNwK00WpmSjX6rlcrlb27QaJk3diLldiZekVRis6YHzDGaYRxS5YIE1JrG8zTyuwwBQtGKnpcgRmarILFbfB5y12o2P5AprwlJWGCab5PUDVCtN0H0x/mDLs+5uluq/3JMoXpdzZRUlkpekJRs5bdRqF8XUzxFKGevrQgDhWB/3lpMZMwwJjdfqCNRygMH6nRSzVRKK66UODY/JEYoKdpieYpAlGnQ6Yj96mgSxnKCaDGsWTBuVKxHBSq7PRsMAYFCZS4TRHNOPuvTvNSYnmSmibkkdttm3llxOxXmI2DTOMxmmiA+bAG6Zqu+BZ3RTd82bi2MoviZPcxaBgmvVYROIU6nMUxi82l8udH7fT2F/0bNknGPJNWjtMF7F58NILjABgaNZswgR+GWCCCcaWZjjJdML4hLNRg6FJPwm3i844Ye6fKAzcKZaWAE0Yn3A2HOkehubJCNwIJO20TDel5sClBxi4YXzakWe4+RFws15g4LcUsySFWjAjEs4YYZLwiRZ1wjBPBCaggLxYrZbLCfxk6DCyAZ8oRQcMUzgDipdPjg8vxFwdSy53tHl4Wn00ETNMET7hySC6F5hE+fSs9O68BBDA2BMLeFA/Pz8XD0+6GVc/GkYiMEkdPdOdMF3G5nL1uHZ+Xs+JYq12sXm4fXx8enp8fHi2eVE7EkGZfH6+eVrt+XoPKwwYAEAxnTBTXVgGkFwAi4i1i7Pt0yruNU2Bjnd2UcuVzktnvfIww+D9pjIUht51Zcr39OWTw3qplLs43D4pd+wc4GD1dPusBlrVQJsBwigUBmufkR0w837V2ckZVPLwGFrEvRWy0JlYKomHPazHYYVJYr+qqE6Y771hEmfnpYtjaBM/jZB9aqV3PSwvYIURMQzJmhYMN+MDc4K6SXdKJUDv2h6gZbQIGQDgbQpI1rTB+IYzxk7QUwhgg0mSjcCUdpiRqM66gyGzS8kMhiEDZxuMfzgbgrDBkDRDr3DYYUbhmjMjDL31TRvM/J8j4GddwpAZ2SS9/ZXpdDO/2DwcYYIRKEzGkWdGYxqgSxg86pfzVPmK6ITxSTTDESaYAi0s0yhr2mEORmEJTXcwuLJMNveb1PJPH8akMDhr2mGmRmEisDsYPIBpphmOb4MZidjcHYweeQMkYu2eW/wZPP85b7uL5EiEs+7mAOBWYO9/sW1rCr9q895++7gnBPO/90CeeR2YGYXqrMvxTKlUzxWzcKdcfMCAB6Jprnm7rpEIZ8/9dmxHc5h4wTygITclS6PNJY2odaPJZ6MQzl56YCCBW+Gh/VdFQ4xWFLxTpkmWaeatPUxHoDr75qDdEoQBCv5FYFTDyBfMClC/CWPki3oF8YRvA/ezyfs2W3TYGoErojWmRh5u7RmNFtKADq2hRQfyxQLcdD0cdHk2+ZK33WvPdQNCKRmJJMF/qDxQXzb5fCQSkSMRFR3Iq1H4l+GZIC/TvJiewbunExzXTSukTFrXC1raiCAppqVK2jSjipbHB6J4O/yY9HEyKEncW9p6ehnsOoAX3kFayipoL0zwFPYtwK9pitTcHDMWm38WiIAzY0Vb7ukIcfq13+VwBSneYet1dAtfGpeDVtJLJJ6nd9js7i6bqK11Y07rbYaqtbV/NbaAxEkd7cAm9juO8rwDkR7oSd1Ob2Q/Rz+0Z0NspWWVljcay1jGMpaxjGUsYxnLWEZN/g9BHfN4H0JTCQAAAABJRU5ErkJggg=="
+     style="margin-top: 70px;">
+
+    </div>
+
+  </mat-drawer-container>
+
+
+
+
+
+
+  <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+  <div id="Update" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 100%;">
+        <form [formGroup]="userform" (ngSubmit)="userupdate()">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title" id="contacttitlepopup">
+              <b>Update Contact</b>
+            </h4>
+            <button type="button" data-dismiss="modal" #closebutton class="btn-close">
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+
+            <div style="display: flex; justify-content: end; width:11%; margin-left:auto">
+              <label class="switch" style="margin-left:-10px;"><input type="checkbox" [checked]="checked"
+                  formControlName="status"><span class="slider round"></span></label>
+            </div>
+            <div class="contact">
+              <div>
+                <label class="label">Name<sup><b>*</b></sup></label>
+                <input type="text" formControlName="name" pInputText style="width: 35%; height: 20px;"
+                  class="contactDetails" placeholder="Enter Name" required>
+              </div>
+              <div>
+                <label class="label">Phonenumber 1* : </label>
+                <input type="text" class="contactDetails" pInputText style="width: 35%; height: 20px;"
+                  placeholder="Enter Phonenumber 1 " formControlName="phone">
+              </div>
+              <div>
+                <label class="label">Phonenumber 2 </label>
+                <input type="text" class="contactDetails" pInputText style="width: 35%; height: 20px;"
+                  placeholder="Enter Phonenumber 2 " formControlName="phone1">
+              </div>
+
+              <div>
+                <label class="label">E-mail 1 </label>
+                <input type="text" class="contactDetails" pInputText style="width: 35%; height: 20px;"
+                  placeholder="Enter E-mail 1" formControlName="email">
+              </div>
+              <div>
+                <label class="label">E-mail 2</label>
+                <input type="text" class="contactDetails" pInputText style="width: 35%; height: 20px;"
+                  placeholder="Enter E-mail 2" formControlName="email1">
+              </div>
+              <div style="display: flex; flex-direction: row; height: 100px; align-items: center">
+
+                <label class="label">Address 1 <sup><b>*</b></sup></label>
+                <textarea formControlName="address" pInputTextarea
+                  style="height: 75px; resize: horizontal; width: 36%;"></textarea>
+              </div>
+              <div style="display: flex; flex-direction: row; height: 100px; align-items: center">
+                <label class="label">Address 2 </label>
+                <textarea pInputTextarea style="height: 75px; resize: horizontal; width: 36%;"
+                  formControlName="address1">
+                      </textarea>
+              </div>
+
+              <div>
+                <label class="label">Relation </label>
+                <input list="relation" id="test" formControlName="reldummy">
+                <input type="text" formControlName="relcontact" style="display: none;">
+                <datalist id="relation" #relation>
+                  <option *ngFor="let relc of relationContact" [value]="relc.contact_name"
+                    [attr.data-ContactId]="relc.Contact_id">{{relc.Contact_id}} - {{relc.contact_phone}}</option>
+                </datalist>
+              </div>
+
+              <div style="display: flex;">
+                <label class="label">Relation Tags</label>
+                <select formControlName="rtagValue" style="height: 21px;">
+                  <option>---select---</option>
+                  <option *ngFor="let tag of rtag" [value]="tag.tag_name">{{ tag.tag_name }}</option>
+                </select>
+                <div>
+                  <input type="text" #testing style="border: 1px solid transparent;" [value]="getname()" readonly
+                    formControlName="relname">
+                </div>
+              </div>
+              <div>
+                <label class="label">Folder : </label>
+                <select formControlName="folderValue">
+                  <option>--select--</option>
+                  <option *ngFor="let folder of foldername" [value]="folder.tag_name">{{ folder.tag_name }}</option>
+                </select>
+              </div>
+
+              <div id="contacttags" style="display: flex; flex-direction: column;">
+                <div style="display: flex;">
+                  <label style="display: inline-block; width: 200px;" class="label"> Tags<sup><b>*</b></sup></label>
+                  <mat-chip-grid #taglist formControlName="tags" id="chip">
+                    <div
+                      style="display: flex; flex-direction: column; height: auto; justify-content: center; align-items: center;">
+                      <div style="display: flex; width: 200px;">
+                        <input placeholder="Add Tags" [matChipInputFor]="taglist"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)"
+                          value="" style="width:100px; border:1px solid black" />
+                        <button type="button" id="newTags" class="btn btn-primary" data-toggle="modal"
+                          data-target="#createtagspopup">New</button>
+                      </div><br>
+                      <div style="display: flex; width: 450px; flex-wrap: wrap;">
+                        <mat-chip-row *ngFor="let tag of Tags; let i = index " [removable]="removable"
+                          (removed)="remove(tag)">
+                          {{ tag }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip-row>
+                      </div>
+                    </div>
+                  </mat-chip-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn " id="contactsavebutton" (click)="onsave()"
+              (click)="createcontactsavepopup()">
+              <i class="fa-regular fa-floppy-disk"></i>
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <app-create-tags></app-create-tags>
+</div>
+
+<!-------------------------------------------------Contact popup------------------------------------------------------------>
+<app-create-contact></app-create-contact>
+<!-------------------------------------------------Folder popup------------------------------------------------------------>
+<app-create-folder></app-create-folder>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-inactivecontact></app-inactivecontact>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-relation></app-relation>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-activecontact></app-activecontact>

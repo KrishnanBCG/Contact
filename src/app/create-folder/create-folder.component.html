@@ -1,0 +1,86 @@
+<!-- The Modal -->
+<div class="modal fade" id="folder">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+<div style="display: flex; justify-content: center; width: 100%;">
+        <h4 class="modal-title" style="font-size: 20px;"><b>List Of Folder</b></h4>
+      </div>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr >
+                <th> Folder List </th>
+                <th> Folder Details </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fol of folder">
+                <td>{{fol.tag_name}}</td>
+                <td>
+                  <button type="button" (click)="contactlist(fol.tag_name)" style="font-size: small;" data-toggle="modal" data-target="#folderlistview" class="btn btn-primary">
+                    View
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <div style="display: flex; justify-content: center; width: 100%;">
+        <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="folderlistview">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #EBE4D1; width: 80%;margin-left: 8%;">
+      <!---------------------------Header---------------------------------->
+      <div class="modal-header">
+        <h4 class="modal-title" 
+            style=" margin-top: 6%;
+                  margin-left: 35%;
+                  font-weight: bolder;
+                  font-size: x-large; 
+                  font-family: Georgia, 'Times New Roman', Times, serif;">{{foldername}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!---------------------------Contact---------------------------------->
+      <div class="modal-body"> 
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Contact Name </th>
+              <th> Phone Number </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of listofcontact">
+              <td>{{list.contact_name}}</td>
+              <td>{{list.contact_phone}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

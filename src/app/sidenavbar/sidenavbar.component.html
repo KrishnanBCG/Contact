@@ -1,0 +1,93 @@
+<div class="sidecontact ">
+
+    <ul class="list">
+        <!-----------------------------contact sidemenu-------------------------------------------------------------->
+        <li class="list-item">
+            <i class="fa-solid fa-address-book" (click)="SideNavToggled()" style="cursor: pointer;" 
+            data-toggle="tooltip" data-placement="top" title="Create Contact & InActive Contact">
+
+            </i>
+            <span [matMenuTriggerFor]="contact" id="contacttoggle">
+                <a>
+                    <b>Contact</b>
+                </a>
+                <mat-menu #contact="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="activecontact">
+                        Contact
+                    </button>
+                    <button mat-menu-item data-toggle="modal" data-target="#inactivecontact" (click)="Inactive()">
+                        In-Active Contact
+                    </button>
+                </mat-menu>
+
+                <mat-menu #activecontact="matMenu">
+                    
+                    <button mat-menu-item data-toggle="modal" data-target="#contact">
+                        Create Contact
+                    </button>
+                    
+                    <button mat-menu-item data-toggle="modal" data-target="#activecontact" (click)="ActiveCont()">
+                        Active Contact
+                    </button>
+                </mat-menu>
+            </span>
+        </li>
+        <!-----------------------------Tags sidemenu-------------------------------------------------------------->
+        <li class="list-item">
+            <i class="fa-solid fa-tag" (click)="SideNavToggled()" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Create Tags & View Tags">
+            </i>
+            <span [matMenuTriggerFor]="animals" id="tagtoggle">
+                <a>
+                    <b>Tags</b>
+                </a>
+                <mat-menu #animals="matMenu">
+                    <button mat-menu-item data-toggle="modal" data-target="#createtagspopup">
+                        Create Tags
+                    </button>
+                    <button mat-menu-item data-bs-toggle="modal" data-bs-target="#viewtagspopup">
+                        View Tags
+                    </button>
+                </mat-menu>
+            </span>
+        </li>
+        <!-----------------------------Folder sidemenu-------------------------------------------------------------->
+        <li class="list-item">
+            <i class="fa-solid fa-folder" (click)="SideNavToggled()" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Folder"></i>
+            <span id="foldertoggle">
+                <a href="" data-toggle="modal" data-target="#folder">
+                    <b>Folder</b>
+                </a>
+            </span>
+        </li>
+
+        <!-----------------------------Relation sidemenu-------------------------------------------------------------->
+        <li class="list-item">
+            <i class="material-icons" (click)="SideNavToggled()"  style="font-size: 25px; cursor: pointer;" 
+            data-toggle="tooltip" data-placement="top" title="Relation">groups</i>
+            <span id="relationtoggle">
+                <a href="" style="cursor: pointer;" data-toggle="modal" data-target="#Relation" (click)="relationtagName()">
+                    <b>Relation</b>
+                </a>
+            </span>
+        </li>
+        <!-----------------------------Login sidemenu-------------------------------------------------------------->
+        <li class="list-item" id="login">
+            <i class="fa-solid fa-right-from-bracket" style="cursor: pointer;" (click)="SideNavToggled()"></i>
+            <span >
+                <a href="" style="cursor: pointer;" (click)="logout()"> Logout</a>
+            </span>
+        </li>
+    </ul>
+</div>
+<!-------------------------------------------------Contact popup------------------------------------------------------------>
+<app-create-contact></app-create-contact>
+<!-------------------------------------------------Folder popup------------------------------------------------------------>
+<app-create-folder></app-create-folder>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-inactivecontact [inActive]="inActive"></app-inactivecontact>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-relation></app-relation>
+<!------------------------------------------------------------------------------------------------------------------------->
+<app-activecontact [active_con]="active_con"></app-activecontact>
+
+

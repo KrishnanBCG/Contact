@@ -1,0 +1,71 @@
+
+<div id="overalllogin" >  
+
+
+  <div id="container">
+
+    <div id="outborder-for-login" [class.mat-elevation-z8]="true">
+            <img src="https://seppam.com/wp-content/uploads/2023/08/favicon-02-1.png" [class.mat-elevation-z8]="true">
+        <mat-tab-group>
+            <mat-tab label="Login">
+              <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+                    <input type="text" id="username" matInput pInputText placeholder="Enter the Email" formControlName="username" />
+            <div style="display: flex;">
+                    <input id="password" [type]="hide? 'password' : 'text'"  pInputText matInput placeholder="Enter Password" formControlName="password"/>
+            
+                    <i class="material-icons" matSuffix (click)="hide=!hide" style="margin-top: 13%; margin-left: -7%;"> {{hide ? 'visibility': 'visibility_off'}} </i>
+            </div>
+                    <button type="submit" id="Login"  class="btn btn-primary">Login</button>
+                    <br><br>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                    <a href="" data-toggle="modal" data-target="#recover"> Forget Password? </a>
+                  </div>
+                  </form>
+            </mat-tab>
+            <mat-tab label="Register">
+              <form [formGroup]="regform" (ngSubmit)="registeruser()">
+                <input type="text" id="username" pInputText placeholder="Enter Full Name" formControlName="regname" required />
+    
+                <input type="text" id="RegisterEmail" pInputText placeholder="Enter E-Mail" formControlName="regemail" required />
+    
+                <input type="text" id="RegisterPhonenumber" pInputText placeholder="Enter Phonenumber" formControlName="regmobile" required/> 
+                <input type="text"  id="RegisterPassword" pInputText placeholder="Enter Password" formControlName="regpassword" required />
+                <div style="display: flex;">
+                <input [type]="hide? 'password' : 'text'" id="Retype" pInputText placeholder="Confirm Password" formControlName="conpassword" required/>
+                
+                <i class="material-icons" matSuffix (click)="hide=!hide" style="margin-top: 5%; margin-left: -8%;"> {{hide ? 'visibility': 'visibility_off'}} </i>
+                </div>
+                <button type="submit" id="Register" class="btn btn-primary">Register</button>
+                </form>
+            </mat-tab>
+          </mat-tab-group>
+    
+    
+    </div>
+    </div>
+
+<!-- </div> -->
+</div>
+
+<div id="recover" class="modal" style="margin-top: 150px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Forget Password</h3>
+        <button data-dismiss="modal" #closemodal class="btn-close" >
+        </button>
+      </div>
+      <div class="modal-body">
+      <form [formGroup]="forgetform" (ngSubmit)="send()">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter the registered email" formControlName="to_email">
+        </mat-form-field>
+        <button class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

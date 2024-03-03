@@ -1,0 +1,85 @@
+  <!-- The Modal -->
+  <div id="Relation" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div style="display: flex; justify-content: center; width: 80%;">
+          <h4 class="modal-title" style="margin-left: 20%; font-size: 20px;"><b>List Of Relation</b></h4>
+        </div>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+  
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th> Relation List </th>
+                  <th> Relation Details </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tag of reltag">
+                  <td>{{tag.tag_name}}</td>
+                  <td><button type="button" style="font-size: small;" data-toggle="modal" data-target="#relationlistview"
+                      class="btn btn-primary">View</button></td>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <div style="display: flex; justify-content: center; width: 100%;">
+          <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
+        </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="modal" id="relationlistview">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-color: #EBE4D1; width: 80%;margin-left: 8%;">
+        <!---------------------------Header---------------------------------->
+        <div class="modal-header">
+          <h4 class="modal-title" style="margin-left: 30%;">---[ Name Of Folder]---</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!---------------------------Contact---------------------------------->
+        <div class="modal-body">
+          
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th style="display: flex; justify-content: center;"> Contact List </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+              </tr>
+              <tr>
+                <td>John</td>
+              </tr>
+              <tr>
+                <td>John</td>
+              </tr>
+            </tbody>
+          </table>
+  
+  
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>

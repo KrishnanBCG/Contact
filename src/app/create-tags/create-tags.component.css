@@ -1,0 +1,38 @@
+.tags{
+    height: 150px;
+}
+#createtag{
+
+    margin-top: 8%;
+    width: 75%;
+    margin-left: 10%;
+
+}
+#viewtag{
+    margin-top: 8%;
+    width: 75%;
+    margin-left: 10%;
+}
+.example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  :host ::ng-deep .custom-ms  
+  .p-multiselect-label { 
+  width: 450px !important; 
+} 
+#tagchips{
+    display: flex;
+    width: 750px;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+}
+.label{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+}
+.Tag{
+    display: inline-block;
+    justify-content: center;
+}

@@ -1,0 +1,158 @@
+<!-- The Modal -->
+<div class="modal" id="viewtagspopup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="viewtags" (ngSubmit)="viewsubmit()">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="margin-left: 43%; font-size: 20px;">
+                        <b>View Tags</b>
+                    </h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;
+                    </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>
+                                Tags-Search
+                            </mat-label>
+                            <input matInput (keyup)="applyFilter($event)" #input>
+                        </mat-form-field>
+
+                        <div class="mat-elevation-z8" style="overflow: scroll; height: 350px;">
+
+                            <table mat-table [dataSource]="dataSource">
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef style="width: 260px;"> Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.tag_name}} </td>
+                                </ng-container>
+
+                                <!--checkbox-->
+                                <ng-container matColumnDef="checkbox">
+                                    <th mat-header-cell *matHeaderCellDef>To Merge </th>
+                                    <td mat-cell *matCellDef class="tablecontact"> <mat-checkbox
+                                            formControlName="merge"></mat-checkbox> </td>
+                                </ng-container>
+
+                                <!--------------------------Active------------------------>
+
+                                <ng-container matColumnDef="Active">
+                                    <th mat-header-cell *matHeaderCellDef style="text-wrap:wrap">Active/InActive</th>
+                                    <td mat-cell *matCellDef class="tablecontact"> <mat-checkbox
+                                            formControlName="active"></mat-checkbox> </td>
+                                </ng-container>
+
+                                <!-- Merge button -->
+
+                                <ng-container matColumnDef="Merge">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        Merge
+                                    </th>
+                                    <td mat-cell *matCellDef class="tablecontact">
+
+                                        <button type="button" class="btn btn-primary" mat-raised-button
+                                            (click)="conformation()">
+                                            Merge
+                                        </button>
+                                    </td>
+                                </ng-container>
+
+                                <!----------------------------------Getdetails--------------------------------------->
+
+                                <ng-container matColumnDef="Getdetails">
+                                    <th mat-header-cell *matHeaderCellDef> Tag Contacts </th>
+                                    <td mat-cell *matCellDef class="tablecontact">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Get details
+                                        </button>
+                                        <!--------------------------popupTable for getdetails------------------------------------------>
+                                        <!-- Modal -->
+                                        <div class="modal" id="myModal" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="margin-left: 40%;"> NAME OF TAGS
+                                                        </h4>
+ 
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Contact Name</th>
+                                                                    <th>PhoneNumber</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Krishnan</td>
+                                                                    <td>9600900248</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Abishek</td>
+                                                                    <td>9944706018</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Abishek</td>
+                                                                    <td>9944706018</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Krishnan</td>
+                                                                    <td>9600900248</td>
+                                                                </tr>
+                                                               
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 40%;">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </td>
+                                </ng-container>
+
+
+
+
+                                <!--------------------------------------------------------------------------------------->
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="margin-right: 48%;" data-dismiss="modal"
+                        (click)="viewtagsavepopup()">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
